@@ -1,4 +1,6 @@
-namespace Cotizaciones {
+using Cotizaciones;
+
+namespace Cotizaciones.Models {
 
     public class User{
 

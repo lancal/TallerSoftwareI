@@ -1,4 +1,4 @@
-@model IEnumerable<Cotizaciones.User>
+@model IEnumerable<Cotizaciones.Models.User>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,6 +11,7 @@
 </p>
 <table class="table">
     <thead>
+        <!-- <title>Login</title> -->
         <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.UserName)
@@ -36,6 +37,12 @@
                 <a asp-action="Delete" asp-route-id="@item.UserID">Delete</a>
             </td>
         </tr>
+
+        <!-- <div id = "login-div"> 
+
+
+            
+        </div> -->
 }
     </tbody>
 </table>

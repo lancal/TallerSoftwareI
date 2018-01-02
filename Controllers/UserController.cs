@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Cotizaciones;
+using Cotizaciones.Data;
+using Cotizaciones.Models;
 
 namespace Cotizaciones.Controllers
 {
@@ -21,7 +22,8 @@ namespace Cotizaciones.Controllers
         // GET: User
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+
+            return View(await _context.users.ToListAsync());
         }
 
         // GET: User/Details/5
@@ -32,7 +34,7 @@ namespace Cotizaciones.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _context.users
                 .SingleOrDefaultAsync(m => m.UserID == id);
             if (user == null)
             {
@@ -72,7 +74,7 @@ namespace Cotizaciones.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.SingleOrDefaultAsync(m => m.UserID == id);
+            var user = await _context.users.SingleOrDefaultAsync(m => m.UserID == id);
             if (user == null)
             {
                 return NotFound();
@@ -123,7 +125,7 @@ namespace Cotizaciones.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User
+            var user = await _context.users
                 .SingleOrDefaultAsync(m => m.UserID == id);
             if (user == null)
             {
@@ -138,15 +140,15 @@ namespace Cotizaciones.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.SingleOrDefaultAsync(m => m.UserID == id);
-            _context.User.Remove(user);
+            var user = await _context.users.SingleOrDefaultAsync(m => m.UserID == id);
+            _context.users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.UserID == id);
+            return _context.users.Any(e => e.UserID == id);
         }
     }
 }
